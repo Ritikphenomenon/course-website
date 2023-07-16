@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import ButtonAppBar from "./Appbar";
-
+import CreateAppBar from "./CreateAppbar";
 function CreateCourse() {
 
   
@@ -76,7 +75,7 @@ function CreateCourse() {
 
   return (
     <div>
-      <ButtonAppBar/>
+      <CreateAppBar/>
     <div style={{ backgroundImage: `url(${backgroundImage})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",

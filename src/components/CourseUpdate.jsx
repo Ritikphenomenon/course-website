@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import ButtonAppBar from "./Appbar";
+import UpdateAppBar from "./UpdateAppbar";
 import { useParams, useNavigate } from "react-router-dom";
 
 function CourseUpdate() {
@@ -82,7 +82,7 @@ function CourseUpdate() {
 
   return (
     <div>
-      <ButtonAppBar />
+      <UpdateAppBar />
 
       <div
         style={{

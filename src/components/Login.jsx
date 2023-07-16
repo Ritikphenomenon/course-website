@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
+import LoginAppBar from "./LoginAppbar";
 
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -11,22 +12,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Login() {
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   const backgroundImages = [
-    "../src/images/admin_register.png",
+    "../src/images/Login_back.jpg",
     
   ];
 
@@ -59,7 +47,7 @@ function Login() {
       });
       console.log(response.data.message); // Display success message
       localStorage.setItem("token", response.data.token); // Store the token
-      navigate("/options"); // Navigate to the options page
+      navigate("/courses"); // Navigate to the options page
     } catch (error) {
       newmessage("Innavlid Credential")
       sethidden("");
@@ -69,6 +57,8 @@ function Login() {
   };
 
   return (
+    <div>
+      <LoginAppBar/>
     <div style={{
       backgroundImage: `url(${backgroundImage})`,
       backgroundSize: "cover",
@@ -125,7 +115,7 @@ function Login() {
       <Alert severity="error">{message}</Alert>
       
     </Stack>
-
+</div>
   </div>
   </div>
   );

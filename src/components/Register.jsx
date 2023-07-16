@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LoginAppBar from "./LoginAppbar";
 
 function Register() {
 
   
 
   const backgroundImages = [
-    "../src/images/admin_register.png",
+    "../src/images/Login_back.jpg",
     
   ];
 
@@ -45,6 +46,8 @@ function Register() {
 
 
   return (
+    <div>
+      <LoginAppBar/>
        <div style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
@@ -95,6 +98,7 @@ function Register() {
             cursor: "pointer" }}>Register</button>
         <br />
        <span>Already a admin? <a href="/login">Login</a></span> 
+    </div>
     </div>
     </div>
   );

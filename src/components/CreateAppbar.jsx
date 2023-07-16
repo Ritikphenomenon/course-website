@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
- function ButtonAppBar() {
+ function CreateAppBar() {
   const navigate=useNavigate();
      
   function Homes(){
@@ -18,11 +18,11 @@ import { useNavigate } from 'react-router-dom';
     navigate("/login");
   }
 
-  function Createcourse(){
-    navigate("/create");
-  }
   function Updatecourse(){
     navigate("/update");
+  }
+  function Allcourse(){
+    navigate("/courses");
   }
   return (
     
@@ -31,8 +31,8 @@ import { useNavigate } from 'react-router-dom';
     <Toolbar>
       <div style={{ marginLeft: "auto" }}>
       <Button color="inherit" onClick={Homes}>Home</Button>
-        <Button color="inherit" onClick={Createcourse}>Create</Button>
-        <Button color="inherit" onClick={Updatecourse}>Update</Button>
+        <Button color="inherit" onClick={Updatecourse}>UPDATE</Button>
+        <Button color="inherit" onClick={Allcourse}>Allcourses</Button>
 
         <Button color="inherit" onClick={Logout}>Logout</Button>
       </div>
@@ -44,4 +44,4 @@ import { useNavigate } from 'react-router-dom';
   );
 }
 
-export default ButtonAppBar;
+export default CreateAppBar;

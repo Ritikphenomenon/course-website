@@ -15,7 +15,7 @@ function Home() {
     const navigate = useNavigate();
 
     const handleExploreAdmin = () => {
-      navigate('/adminlanding'); 
+      navigate('/login'); 
     };
 
     const backgroundImages = [
@@ -33,7 +33,7 @@ function Home() {
 
     
     const handleExploreUser = () => {
-        navigate('/userlanding'); 
+        navigate('/userlogin'); 
       };
   
     return <div   style={{

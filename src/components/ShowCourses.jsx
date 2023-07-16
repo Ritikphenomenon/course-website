@@ -110,9 +110,10 @@ function CourseCard(props) {
       <img src={props.image} style={{width: 300}} ></img>
       <h3
         style={{
-          fontSize: "20px",
+          background: "black",
+          fontSize: "30px",
           fontWeight: "bold",
-          color: "#4caf50",
+          color: "white",
         }}
       >
         {props.price}

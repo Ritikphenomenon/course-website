@@ -1,12 +1,12 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UseButtonAppBar from "./UseAppbar";
+import { useNavigate } from "react-router-dom";
 
 function UseShowCourses() {
   const [courses, setCourses] = useState([]);
-  const[css,setcss]=useState("green")
-
+  
+  const navigate=useNavigate();
   const backgroundImages = [
     "../src/images/admin_course.png",
     
@@ -40,7 +40,7 @@ function UseShowCourses() {
     fetchCourses();
   }, []);
 
-  const handlePurchase = async (courseId) => {
+  const handlePurchase = async (courseId, index) => {
     try {
       const token = localStorage.getItem('token');
       if (token) {
@@ -49,7 +49,17 @@ function UseShowCourses() {
             Authorization: `Bearer ${token}`
           }
         });
-        setcss("white")
+
+        // Create a copy of the courses array
+        const updatedCourses = [...courses];
+
+        // Update the specific button's state based on the index
+        updatedCourses[index].color = 'red';
+        updatedCourses[index].text = 'Added';
+
+        // Update the courses state with the modified array
+        setCourses(updatedCourses);
+
         console.log(response.data.message);
         // Handle the success message or perform any other action
       } else {
@@ -58,6 +68,11 @@ function UseShowCourses() {
     } catch (error) {
       console.error('Error purchasing course:', error.message);
     }
+  };
+
+  
+  const handleview = (courseId) => {
+    navigate(`/courseview/${courseId}`);
   };
 
   return (
@@ -70,7 +85,7 @@ function UseShowCourses() {
     padding: "100px",}}>
       <h1 style={{ textAlign: "center", marginBottom: "20px"  ,  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", fontSize:"70px"}} >Courses Page</h1>
       <div style={{ display: "flex", flexWrap: "wrap" ,justifyContent:"center",gap:"20px"}}>
-        {courses.map((course) => (
+        {courses.map((course, index) => (
           <div
             key={course._id}
             style={{
@@ -84,23 +99,44 @@ function UseShowCourses() {
             <h2>{course.title}</h2>
             <p>{course.description}</p>
             <img src={course.imageLink} style={{ width: "100%" }} alt={course.title} />
-            <button
-  onClick={() => handlePurchase(course._id)}
-  style={{ background: "#4CAF50",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    padding: "8px 16px",
-    cursor: "pointer",
-    transition: "background 0.3s",
-    outline: "none",
-    fontWeight: "bold",
-    fontSize: "14px"
-  }}
->
-  Purchase
-</button>
+           
+           <button
+              onClick={() => handlePurchase(course._id, index)}
+              style={{
+                background: course.color || 'green',
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                padding: "8px 16px",
+                cursor: "pointer",
+                transition: "background 0.3s",
+                outline: "none",
+                fontWeight: "bold",
+                fontSize: "14px",
+                marginRight:"10px"
+              }}
+            >
+              {course.text || 'Purchase'}
+            </button>
 
+            <button
+              onClick={() => handleview(course._id)}
+              style={{
+                background: "green",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                padding: "8px 16px",
+                cursor: "pointer",
+                transition: "background 0.3s",
+                outline: "none",
+                fontWeight: "bold",
+                fontSize: "14px",
+                marginLeft:"10px"
+              }}
+            >
+              View Course
+            </button>
           </div>
         ))}
       </div>

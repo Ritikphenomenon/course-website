@@ -2,10 +2,7 @@ import  React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 
  function UseButtonAppBar() {
@@ -18,9 +15,8 @@ import { useNavigate } from 'react-router-dom';
     localStorage.setItem("token", null);
     navigate("/");
   }
-  function Options(){
-    
-    navigate("/useroptions");
+  function Purchased(){
+    navigate("/purchased");
   }
   return (
      
@@ -29,7 +25,7 @@ import { useNavigate } from 'react-router-dom';
     <Toolbar>
       <div style={{ marginLeft: "auto" }}>
       <Button color="inherit" onClick={Homes}>Home</Button>
-        <Button color="inherit" onClick={Options}>Option</Button>
+        <Button color="inherit" onClick={Purchased}>MYcourses</Button>
         <Button color="inherit" onClick={Logout}>Logout</Button>
       </div>
     </Toolbar>

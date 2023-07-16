@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
-import UsePurchaseAppBar from "./Usepurchbar";
-import { useNavigate } from "react-router-dom";
+import UseButtonAppBar from "./UseAppbar";
+import { useParams } from "react-router-dom";
 
-function PurchShowCourses() {
-  const [purchasedCourses, setPurchasedCourses] = useState([]);
-  const navigate=useNavigate();
-  
-  const backgroundImages = [
+function UserCourseview (){
+   const [courses,setcourses]=useState([]);
+   const  {keys} = useParams();
+   const backgroundImages = [
     "../src/images/admin_course.png",
     
   ];
@@ -17,48 +16,43 @@ function PurchShowCourses() {
   };
 
   const backgroundImage = getRandomBackground();
-
+   
   useEffect(() => {
-    const fetchPurchasedCourses = async () => {
+    const fetchCourses = async () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await axios.get('http://localhost:3000/users/purchasedCourses', {
+          const response = await axios.get(`http://localhost:3000/users/coursedetails/${keys}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          setPurchasedCourses(response.data.purchasedCourses);
+          setcourses(response.data.course);
         } else {
           console.log('Token not found in localStorage');
         }
       } catch (error) {
-        console.error('Error fetching purchased courses:', error.message);
+        console.error('Error fetching courses:', error.message);
       }
     };
 
-    fetchPurchasedCourses();
+    fetchCourses();
   }, []);
-
-  
-  const handleviewpurchased = (courseId) => {
-    navigate(`/coursepurchaseview/${courseId}`);
-  };
-
 
   return (
     <div>
-      <UsePurchaseAppBar/>
+       
+      <UseButtonAppBar/>
        <div style={{ backgroundImage: `url(${backgroundImage})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     minHeight: "80vh",
     padding: "100px",}}>
-      <h1 style={{ textAlign: "center", marginBottom: "20px"  ,  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", fontSize:"70px"}} >Purchased Courses</h1>
+      <h1 style={{ textAlign: "center", marginBottom: "20px"  ,  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", fontSize:"70px"}} >Courses Page</h1>
       <div style={{ display: "flex", flexWrap: "wrap" ,justifyContent:"center",gap:"20px"}}>
-        {purchasedCourses.map((course) => (
+        
           <div
-            key={course._id}
+            key={courses._id}
             style={{
               border: "1px solid gray",
               borderRadius: "8px",
@@ -67,12 +61,11 @@ function PurchShowCourses() {
               width: "300px",
             }}
           >
-            <h3>{course.title}</h3>
-            <p>{course.description}</p>
-            <img src={course.imageLink} style={{ width: "100%" }} alt={course.title} />
-            
-<button
-  onClick={() => handleviewpurchased(course._id)}
+            <h2>{courses.title}</h2>
+            <p>{courses.description}</p>
+            <img src={courses.imageLink} style={{ width: "100%" }} alt={courses.title} />
+            <button
+  onClick={() => handlePurchase(courses._id)}
   style={{ background: "#4CAF50",
     color: "white",
     border: "none",
@@ -85,15 +78,20 @@ function PurchShowCourses() {
     fontSize: "14px"
   }}
 >
-  GO Course
+  Purchase
 </button>
 
-          </div>
-        ))}
-      </div>
+
+</div>
+      
       </div>
     </div>
+    </div>
   );
+
+
+  
+
 }
 
-export default PurchShowCourses;
+export default UserCourseview;

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ButtonAppBar from "./Appbar.jsx";
+import UpdateAppBar from "./UpdateAppbar";
 import { useNavigate } from "react-router-dom";
 
 function UpShowCourses() {
-  const navigate=useNavigate();
+  
   const [courses, setCourses] = useState([]);
 
   const backgroundImages = [
     "../src/images/admin_course.png",
-    
+  
   ];
 
   const getRandomBackground = () => {
@@ -43,7 +43,7 @@ function UpShowCourses() {
 
   return (
     <div>
-      <ButtonAppBar />
+      <UpdateAppBar />
       <div
         style={{
           backgroundImage: `url(${backgroundImage})`,
@@ -61,7 +61,7 @@ function UpShowCourses() {
             fontSize: "70px",
           }}
         >
-          Courses Page
+          Courses Update Page
         </h1>
         <div
           style={{
@@ -126,13 +126,12 @@ function CourseCard(props) {
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
       }}
     >
       <h2
         style={{
-          marginBottom: "10px",
+          
           textAlign: "center",
           fontSize: "24px",
           fontWeight: "bold",
@@ -155,16 +154,54 @@ function CourseCard(props) {
       <img src={props.image} style={{ width: 300 }} alt={props.title} />
       <h3
         style={{
-          fontSize: "20px",
+          background: "black",
+          fontSize: "30px",
           fontWeight: "bold",
-          color: "#4caf50",
+          color: "white",
         }}
       >
         {props.price}
       </h3>
-      <button onClick={handlenext}>Update</button>
+      <div style={{ display: 'flex', gap: '10px' }}>
+  <button
+    style={{
+      background: 'green',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      padding: '8px 16px',
+      cursor: 'pointer',
+      outline: 'none',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      flex: 1, // Apply flex property
+    }}
+    onClick={handlenext}
+  >
+    Update
+  </button>
 
-      <button onClick={() => handleDelete(props.courseId)}>Delete</button>
+  <button
+    style={{
+      background: 'green',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      padding: '8px 16px',
+      cursor: 'pointer',
+      transition: 'background 0.3s',
+      outline: 'none',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      marginLeft: '10px',
+      flex: 1, // Apply flex property
+    }}
+    onClick={() => handleDelete(props.courseId)}
+  >
+    Delete
+  </button>
+</div>
+
     </div>
   );
 }
